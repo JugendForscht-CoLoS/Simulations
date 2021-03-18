@@ -28,8 +28,8 @@ public class Reader{
             }
             else if(count == 0) {
                 String[] loc = line.split(",",1);
-                this.location[0] = Integer.parseInt(loc[0];
-                this.location[1] = Integer.parseInt(loc[1];
+                this.location[0] = Integer.parseInt(loc[0]);
+                this.location[1] = Integer.parseInt(loc[1]);
             }
             else if(count == 1) this.date = line;
             else {
