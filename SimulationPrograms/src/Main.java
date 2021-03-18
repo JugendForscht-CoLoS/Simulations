@@ -1,4 +1,3 @@
-package SimulationPrograms;
 
 public class Main {
 
