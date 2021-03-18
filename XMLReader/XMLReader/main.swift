@@ -20,19 +20,7 @@ do {
         
         let content = try String(contentsOfFile: "/Users/timjaeger/Desktop/JuFo/Programme/Simulations/SunData/" + file)
         
-        var charArray = Array(content)
-        
-        for i in 0 ..< 65 {
-            
-            charArray.remove(at: i)
-        }
-        
-        charArray.insert("'", at: 10)
-        charArray.insert("'", at: 13)
-        
-        let validContent = String(charArray)
-        
-        let xml = SWXMLHash.parse(validContent)
+        let xml = SWXMLHash.parse(content)
         
         var date = ""
         var location = ""
@@ -40,15 +28,15 @@ do {
         var azimuts: [String] = []
         var elevations: [String] = []
         
-        if let content = xml["html"]["body"]["table"]["tr"][0][1].element?.text {
+        if let content = xml["html"]["body"]["table"]["tr"][0]["td"][1].element?.text {
             
             date = content
         }
-        if let content = xml["html"]["body"]["table"]["tr"][2][1].element?.text {
+        if let content = xml["html"]["body"]["table"]["tr"][2]["td"][1].element?.text {
             
             location = content
         }
-        if let content = xml["html"]["body"]["table"]["tr"][4][0].element?.text {
+        if let content = xml["html"]["body"]["table"]["tr"][4]["td"][0].element?.text {
             
             startTimeUTC = content
         }
@@ -78,8 +66,6 @@ do {
         file += location + "\n"
         file += date + "\n"
         file += startTimeUTC + "\n"
-        
-        print(file)
         
         for i in 0 ..< elevations.count {
             
