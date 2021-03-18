@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Reader{
 
     private int[] location = new int[2];
-    private String startTime = "";
+    private int startTime = 0;
     private String date = "";
     private ArrayList<Integer> azimut = new ArrayList<Integer>();
     private ArrayList<Integer> elevation = new ArrayList<Integer>();
@@ -33,7 +33,8 @@ public class Reader{
             }
             else if(count == 1) this.date = line;
             else {
-
+                String[] time = line.split(":",2);
+                this.startTime = 60*Integer.parseInt(time[0]) + Integer.parseInt(time[1]);
             }
 
             line = reader.readLine();
@@ -48,7 +49,7 @@ public class Reader{
         return this.location;
     }
 
-    public String getStartTime(){
+    public int getStartTime(){
         return this.startTime;
     }
 
@@ -56,12 +57,13 @@ public class Reader{
         return this.date;
     }
 
-    public int[] getElevation() {
-        Integer[] arr = new Integer[this.elevation.size()]
+    public Integer[] getElevation() {
+        Integer[] arr = new Integer[this.elevation.size()];
         return this.elevation.toArray(arr);
     }
 
-    public int[] getAzimut() {
-        return this.azimut;
+    public Integer[] getAzimut() {
+        Integer[] arr = new Integer[this.azimut.size()];
+        return this.azimut.toArray(arr);
     }
 }
