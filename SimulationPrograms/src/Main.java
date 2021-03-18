@@ -1,16 +1,20 @@
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Main {
 
-    public Reader reader = new Reader();
+    public static Reader reader;
 
-    public Main() throws IOException {
-        reader.read();
+    static {
+        try {
+            reader = new Reader();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
+        reader.read();
         System.out.println("Hallo");
     }
-
-
 }
