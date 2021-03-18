@@ -6,8 +6,8 @@ public class Reader{
     private int[] location = new int[2];
     private int startTime = 0;
     private String date = "";
-    private ArrayList<Integer> azimut = new ArrayList<Integer>();
-    private ArrayList<Integer> elevation = new ArrayList<Integer>();
+    private ArrayList<Double> azimut = new ArrayList<Double>();
+    private ArrayList<Double> elevation = new ArrayList<Double>();
 
     private File file = new File("../../Workspace/data0.sundata");
     private BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -23,8 +23,8 @@ public class Reader{
         while(line != null){
             if (count > 2){
                 String[] sunPosition = line.split(";",1);
-                this.azimut.add(Integer.parseInt(sunPosition[0]));
-                this.elevation.add(Integer.parseInt(sunPosition[1]));
+                this.azimut.add(Double.parseDouble(sunPosition[0]));
+                this.elevation.add(Double.parseDouble(sunPosition[1]));
             }
             else if(count == 0) {
                 String[] loc = line.split(",",1);
