@@ -36,7 +36,7 @@ do {
             
             location = content
         }
-        if let content = xml["html"]["body"]["table"]["tr"][4]["td"][0].element?.text {
+        if let content = xml["html"]["body"]["table"]["tr"][5]["td"][0].element?.text {
             
             startTimeUTC = content
         }
@@ -45,7 +45,7 @@ do {
         
         for tr in xml["html"]["body"]["table"]["tr"].all {
             
-            if index < 4 {
+            if index < 5 {
                 
                 index += 1
                 continue
@@ -55,7 +55,7 @@ do {
                 
                 elevations.append(content)
             }
-            if let content = tr["td"][1].element?.text {
+            if let content = tr["td"][2].element?.text {
                 
                 azimuts.append(content)
             }
@@ -67,7 +67,7 @@ do {
         file += date + "\n"
         file += startTimeUTC + "\n"
         
-        for i in 0 ..< elevations.count {
+        for i in 0 ..< (elevations.count - 1) {
             
             file += azimuts[i] + ";" + elevations[i] + "\n"
         }
