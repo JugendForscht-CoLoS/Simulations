@@ -8,6 +8,9 @@ public class Reader{
     private int date = 0;
     private double[] azimut, elevation;
 
+    private int[] monate1 = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+    private int[] monate2 = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
+
     private File file = new File("C:/Users/Jonas/IdeaProjects/Simulations/SimulationPrograms/datafiles/data0.sundata");
     private BufferedReader reader = new BufferedReader(new FileReader(file));
 
@@ -52,10 +55,20 @@ public class Reader{
                 this.location[0] = Double.parseDouble(loc[0]);
                 this.location[1] = Double.parseDouble(loc[1]);
             }
-            else if(count == 1) this.date = line;
+            else if(count == 1){
+                String[] date = line.split("/", 3);
+                this.date = (Integer.parseInt(date[0]) - 1) * 86400;
+                if ((Integer.parseInt(date[2]) - 2004) % 4 == 0) {
+                    this.date += 86400 * monate2[Integer.parseInt(date[1]) - 1];
+                }
+                else {
+                    this.date += 86400 * monate1[Integer.parseInt(date[1]) - 1];
+                }
+            }
             else {
                 String[] time = line.split(":",3);
                 this.startTime = 60*Integer.parseInt(time[0]) + Integer.parseInt(time[1]);
+                this.date += this.startTime;
             }
 
             line = this.reader.readLine();
@@ -74,7 +87,7 @@ public class Reader{
         return this.startTime;
     }
 
-    public String getDate() {
+    public int getDate() {
         return this.date;
     }
 
