@@ -7,6 +7,7 @@ public class Reader{
     private int startTime = 0;                  //in Minuten
     private int date = 0;
     private double[] azimut, elevation;
+    public int length;
 
     private int[] monate1 = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
     private int[] monate2 = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
@@ -15,9 +16,11 @@ public class Reader{
     private BufferedReader reader = new BufferedReader(new FileReader(file));
 
     public Reader() throws FileNotFoundException {
+        length = lengthOfFile() - 3;
     }
 
-    private int lengthOfFile() throws IOException {
+
+    public int lengthOfFile() throws IOException {
         FileReader fr = new FileReader(this.file);
         int count = 0;
         int character;
