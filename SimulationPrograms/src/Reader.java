@@ -3,49 +3,70 @@ import java.util.ArrayList;
 
 public class Reader{
 
-    private int[] location = new int[2];
-    private int startTime = 0;
+    private double[] location = new double[2];
+    private int startTime = 0;                  //in Minuten
     private String date = "";
-    private ArrayList<Double> azimut = new ArrayList<Double>();
-    private ArrayList<Double> elevation = new ArrayList<Double>();
+    private double[] azimut, elevation;
 
-    private File file = new File("../datafiles/data0.sundata");
+    private File file = new File("C:/Users/Jonas/IdeaProjects/Simulations/SimulationPrograms/datafiles/data0.sundata");
     private BufferedReader reader = new BufferedReader(new FileReader(file));
 
     public Reader() throws FileNotFoundException {
     }
 
+    private int lengthOfFile() throws IOException {
+        FileReader fr = new FileReader(this.file);
+        int count = 0;
+        int character;
+
+        while((character = fr.read()) != -1){
+            if(character == 10){
+                count++;
+            }
+        }
+        return count;
+    }
+
     public void read() throws IOException {
 
-        int count = 0;
-        String line = reader.readLine();
+        int length = this.lengthOfFile();
+        this.elevation = new double[length-3];
+        this.azimut = new double[length-3];
 
+        int count = 0;
+        String line = this.reader.readLine();
+
+        //alle Zeilen der Datei auslesen und den Variablen zuordnen
+        //1. Standort
+        //2. Datum
+        //3. Uhrzeit
+        //4. bis n. Sonnenposition
         while(line != null){
             if (count > 2){
-                String[] sunPosition = line.split(";",1);
-                this.azimut.add(Double.parseDouble(sunPosition[0]));
-                this.elevation.add(Double.parseDouble(sunPosition[1]));
+                String[] sunPosition = line.split(";",2);
+                this.azimut[count-3] = Double.parseDouble(sunPosition[0]);
+                this.elevation[count-3] = Double.parseDouble(sunPosition[1]);
             }
             else if(count == 0) {
-                String[] loc = line.split(",",1);
-                this.location[0] = Integer.parseInt(loc[0]);
-                this.location[1] = Integer.parseInt(loc[1]);
+                String[] loc = line.split(",",2);
+                this.location[0] = Double.parseDouble(loc[0]);
+                this.location[1] = Double.parseDouble(loc[1]);
             }
             else if(count == 1) this.date = line;
             else {
-                String[] time = line.split(":",2);
+                String[] time = line.split(":",3);
                 this.startTime = 60*Integer.parseInt(time[0]) + Integer.parseInt(time[1]);
             }
 
-            line = reader.readLine();
+            line = this.reader.readLine();
             count++;
         }
 
-        reader.close();
+        this.reader.close();
         
     }
 
-    public int[] getLocation(){
+    public double[] getLocation(){
         return this.location;
     }
 
@@ -57,13 +78,11 @@ public class Reader{
         return this.date;
     }
 
-    public Integer[] getElevation() {
-        Integer[] arr = new Integer[this.elevation.size()];
-        return this.elevation.toArray(arr);
+    public double[] getElevation() {
+        return this.elevation;
     }
 
-    public Integer[] getAzimut() {
-        Integer[] arr = new Integer[this.azimut.size()];
-        return this.azimut.toArray(arr);
+    public double[] getAzimut() {
+        return this.azimut;
     }
 }
