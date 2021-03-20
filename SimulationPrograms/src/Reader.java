@@ -5,7 +5,7 @@ public class Reader{
 
     private double[] location = new double[2];
     private int startTime = 0;                  //in Minuten
-    private String date = "";
+    private int date = 0;
     private double[] azimut, elevation;
 
     private File file = new File("C:/Users/Jonas/IdeaProjects/Simulations/SimulationPrograms/datafiles/data0.sundata");
