@@ -9,7 +9,7 @@ public class Reader{
     private ArrayList<Double> azimut = new ArrayList<Double>();
     private ArrayList<Double> elevation = new ArrayList<Double>();
 
-    private File file = new File("../../Workspace/data0.sundata");
+    private File file = new File("../datafiles/data0.sundata");
     private BufferedReader reader = new BufferedReader(new FileReader(file));
 
     public Reader() throws FileNotFoundException {
