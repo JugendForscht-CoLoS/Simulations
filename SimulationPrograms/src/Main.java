@@ -17,17 +17,6 @@ public class Main {
         reader.read();
         double[] location = reader.getLocation();
 
-        System.out.println(location[0]);
-        System.out.println(location[1]);
-        System.out.println();
-        System.out.println(reader.getStartTime());
-        System.out.println();
-
-        double[] elevation = reader.getElevation();
-        double[] azimut = reader.getAzimut();
-
-        for(int i=0; i<elevation.length; i++){
-            System.out.println(azimut[i]+" "+elevation[i]);
-        }
+        
     }
 }
