@@ -18,9 +18,9 @@ public class Simulator {
     // @param Reader mit spezifischer Zeit, spezifischem Standort, Sonnenverlauf
     // @return 1. Dimension: Tageszeit, 2. Dimension: Messfehler, 3. Dimension: Standort
 
-    public double[][][] getDeviationOfLocation(Reader reader){
+    public double[][] getDeviationOfLocation(Reader reader){
 
-        double[][][] returnValues = new double[reader.length - (int)(holdingTime/(5.0 * 60.0))][100][2];
+        double[][] returnValues = new double[reader.length - (int)(holdingTime/(5.0 * 60.0))][2];
 
         // iteriert durch die Zeiten, abhängig von Wartezeit (hohe Wartezeit, wenig Messungen)
         for(int t = 0; t < reader.length - (int)(holdingTime/(5.0 * 60.0)); t++) {
@@ -38,9 +38,11 @@ public class Simulator {
                 int date = reader.getDate() + 60 * 5 * t;
 
                 double[] location = calculatePosition(azimut1, elevation1, time, date, azimut2, elevation2);
-                returnValues[t][i][0] = Math.abs(location[0] - reader.getLocation()[0]);
-                returnValues[t][i][1] = Math.abs(location[1] - reader.getLocation()[1]);
+                returnValues[t][0] += Math.abs(location[0] - reader.getLocation()[0]);
+                returnValues[t][1] += Math.abs(location[1] - reader.getLocation()[1]);
             }
+            returnValues[t][0] /= 100;
+            returnValues[t][1] /= 100;
         }
         return returnValues;
     }
