@@ -6,6 +6,14 @@ public class Simulator {
     public double deviationElevation;
     public double holdingTime;
     private Random random;
+    
+    public Simulator(double deviationAzimut, double deviationElevation, double holdingTime) {
+        
+        this.deviationAzimut = deviationAzimut;
+        this.deviationElevation = deviationElevation;
+        this.holdingTime = holdingTime;
+    }
+    
     // Methode, die die werte durchgeht
     // @param Reader mit spezifischer Zeit, spezifischem Standort, Sonnenverlauf
     // @return 1. Dimension: Tageszeit, 2. Dimension: Messfehler, 3. Dimension: Standort
@@ -19,10 +27,13 @@ public class Simulator {
 
             // streut random Messfehler (Azimut und Elevation)
             for (int i = 0; i < 100; i++) {
+                
                 double azimut1 = reader.getAzimut()[t] + 2 * deviationAzimut * random.nextDouble() - deviationAzimut;
                 double elevation1 = reader.getElevation()[t] + 2 * deviationElevation * random.nextDouble() - deviationElevation;
+                
                 double azimut2 = reader.getAzimut()[t + (int)(holdingTime/(5.0 * 60.0))] + 2 * deviationAzimut * random.nextDouble() - deviationAzimut;
                 double elevation2 = reader.getElevation()[t + (int)(holdingTime/(5.0 * 60.0))] + 2 * deviationElevation * random.nextDouble() - deviationElevation;
+                
                 int time = reader.getStartTime() + 60 * 5 * t;
                 int date = reader.getDate() + 60 * 5 * t;
 
@@ -36,6 +47,7 @@ public class Simulator {
     // Methode, die den Standort berechnet
 
     private double[] calculatePosition(double azimut3, double elevation3, int time, int date, double azimut4, double elevation4){
+        
         double azimut1 = Math.PI / 180 * azimut3;
         double azimut2 = Math.PI / 180 * azimut4;
         double elevation1 = Math.PI / 180 * elevation3;
