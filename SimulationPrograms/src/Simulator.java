@@ -38,7 +38,8 @@ public class Simulator {
                 int date = reader.getDate() + 60 * 5 * t;
 
                 double[] location = calculatePosition(azimut1, elevation1, time, date, azimut2, elevation2);
-                returnValues[t][i] = location;
+                returnValues[t][i][0] = Math.abs(location[0] - reader.getLocation()[0]);
+                returnValues[t][i][1] = Math.abs(location[1] - reader.getLocation()[1]);
             }
         }
         return returnValues;
