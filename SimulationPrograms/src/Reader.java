@@ -4,18 +4,20 @@ import java.util.ArrayList;
 public class Reader{
 
     private double[] location = new double[2];
-    private int startTime = 0;                  //in Minuten
-    private int date = 0;
+    private int startTime = 0; //in Sekunden
+    private int date = 0; //in Sekunden
     private double[] azimut, elevation;
     public int length;
 
     private int[] monate1 = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
     private int[] monate2 = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
 
-    private File file = new File("C:/Users/Jonas/IdeaProjects/Simulations/SimulationPrograms/datafiles/data0.sundata");
+    private File file;
     private BufferedReader reader = new BufferedReader(new FileReader(file));
 
-    public Reader() throws FileNotFoundException {
+    public Reader(String path) throws FileNotFoundException {
+        
+        this.file = new File(path);
         length = lengthOfFile() - 3;
     }
 
@@ -70,7 +72,7 @@ public class Reader{
             }
             else {
                 String[] time = line.split(":",3);
-                this.startTime = 60*Integer.parseInt(time[0]) + Integer.parseInt(time[1]);
+                this.startTime = 3600 * Integer.parseInt(time[0]) + 60 * Integer.parseInt(time[1]);
                 this.date += this.startTime;
             }
 
