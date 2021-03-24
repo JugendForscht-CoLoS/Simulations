@@ -12,6 +12,7 @@ public class Simulator {
         this.deviationAzimut = deviationAzimut;
         this.deviationElevation = deviationElevation;
         this.holdingTime = holdingTime;
+        this.random = new Random();
     }
     
     // Methode, die die werte durchgeht
@@ -23,8 +24,7 @@ public class Simulator {
         double[][] returnValues = new double[reader.length - (int)(holdingTime/(5.0 * 60.0))][2];
 
         // iteriert durch die Zeiten, abhängig von Wartezeit (hohe Wartezeit, wenig Messungen)
-        for(int t = 0; t < reader.length - (int)(holdingTime/(5.0 * 60.0)); t++) {
-
+        for(int t = 0; t < reader.length - (int)(holdingTime/(5.0 * 60.0))-1; t++) {
             // streut random Messfehler (Azimut und Elevation)
             for (int i = 0; i < 100; i++) {
                 

@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class Reader{
 
@@ -16,18 +15,21 @@ public class Reader{
     private int[] monate2 = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335};
 
     private File file;
-    private BufferedReader reader = new BufferedReader(new FileReader(file));
+    private BufferedReader reader;
 
     public Reader(String path) throws IOException {
-        
         this.file = new File(path);
+        this.reader = new BufferedReader(new FileReader(file));
         length = this.lengthOfFile() - 3;
+
+        this.elevation = new double[length];
+        this.azimut = new double[length];
     }
 
 
     public int lengthOfFile() throws IOException {
         FileReader fr = new FileReader(this.file);
-        int count = 0;
+        int count = 1;
         int character;
 
         while((character = fr.read()) != -1){
@@ -39,10 +41,6 @@ public class Reader{
     }
 
     public void read() throws IOException {
-
-        int length = this.lengthOfFile();
-        this.elevation = new double[length-3];
-        this.azimut = new double[length-3];
 
         int count = 0;
         String line = this.reader.readLine();
