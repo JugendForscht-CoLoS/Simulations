@@ -3,6 +3,9 @@ import java.util.ArrayList;
 
 public class Reader{
 
+    private String dateString;
+    private String timeString;
+
     private double[] location = new double[2];
     private int startTime = 0; //in Sekunden
     private int date = 0; //in Sekunden
@@ -15,10 +18,10 @@ public class Reader{
     private File file;
     private BufferedReader reader = new BufferedReader(new FileReader(file));
 
-    public Reader(String path) throws FileNotFoundException {
+    public Reader(String path) throws IOException {
         
         this.file = new File(path);
-        length = lengthOfFile() - 3;
+        length = this.lengthOfFile() - 3;
     }
 
 
@@ -61,6 +64,8 @@ public class Reader{
                 this.location[1] = Double.parseDouble(loc[1]);
             }
             else if(count == 1){
+                dateString = line;
+
                 String[] date = line.split("/", 3);
                 this.date = (Integer.parseInt(date[0]) - 1) * 86400;
                 if ((Integer.parseInt(date[2]) - 2004) % 4 == 0) {
@@ -71,6 +76,8 @@ public class Reader{
                 }
             }
             else {
+                timeString = line;
+
                 String[] time = line.split(":",3);
                 this.startTime = 3600 * Integer.parseInt(time[0]) + 60 * Integer.parseInt(time[1]);
                 this.date += this.startTime;
@@ -102,5 +109,13 @@ public class Reader{
 
     public double[] getAzimut() {
         return this.azimut;
+    }
+
+    public String getDateString() {
+        return this.dateString;
+    }
+
+    public String getTimeString() {
+        return this.timeString;
     }
 }
