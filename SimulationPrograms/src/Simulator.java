@@ -16,7 +16,7 @@ public class Simulator {
     
     // Methode, die die werte durchgeht
     // @param Reader mit spezifischer Zeit, spezifischem Standort, Sonnenverlauf
-    // @return 1. Dimension: Tageszeit, 2. Dimension: Messfehler, 3. Dimension: Standort
+    // @return 1. Dimension: Tageszeit, 2. Dimension: Standort
 
     public double[][] getDeviationOfLocation(Reader reader){
 
