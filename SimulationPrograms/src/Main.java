@@ -16,7 +16,7 @@ public class Main {
             for (double holdingTime = 5 * 60; holdingTime < 2 * 3600; holdingTime += 5 * 60) {
                 
                 Simulator s = new Simulator(5.7, 1.01, holdingTime);
-                w.write(holdingTime, s.getDeviationOfLocation(reader);
+                w.write(holdingTime, s.getDeviationOfLocation(reader));
             }
         }
     }
