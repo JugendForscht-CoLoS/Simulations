@@ -23,7 +23,7 @@ public class Writer {
 
     public void write(double holdingTime, double[][] deviation) throws IOException {
         for(int t = 0; t < deviation.length; t++){
-            writer.write(holdingTime+";"+t*5+";"+deviation[t][0]+";"+deviation[t][1]);
+            writer.write(holdingTime+";"+t*5*60+";"+deviation[t][0]+";"+deviation[t][1]);
             writer.newLine();
         }
         writer.flush();
