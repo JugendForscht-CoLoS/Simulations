@@ -72,7 +72,7 @@ do {
             file += azimuts[i] + ";" + elevations[i] + "\n"
         }
         
-        let url = URL(fileURLWithPath: "/Users/timjaeger/Desktop/JuFo/Programme/Simulations/SimulationPrograms/datafiles/data\(fileIndex).sundata")
+        let url = URL(fileURLWithPath: "/Users/timjaeger/Desktop/JuFo/Programme/Simulations/SimulationPrograms/datafiles/sunData/data\(fileIndex).sundata")
         
         try file.write(to: url, atomically: true, encoding: .utf8)
         
