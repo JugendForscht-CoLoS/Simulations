@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -7,9 +8,15 @@ public class Main {
 
     public static void main(String[] args) throws IOException, FileNotFoundException {
         
-        Reader[] data = new Reader[1];
+        Reader[] data = new Reader[32];
         
-        data[0] = new Reader(repoPath + "SimulationPrograms/datafiles/sunData/data0.sundata");
+        File directory = new File(repoPath + "SimulationPrograms/datafiles/sundata");
+        File[] files = directory.listFiles();
+
+        for (int i = 0; i < files.length; i++) {
+
+            data[i] = new Reader(files[i].getPath());
+        }
         
         for (int i = 0; i < data.length; i++) {
 
