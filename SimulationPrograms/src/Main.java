@@ -10,7 +10,7 @@ public class Main {
         
         Reader[] data = new Reader[12];
         
-        File directory = new File(repoPath + "SimulationPrograms/datafiles/sundata");
+        File directory = new File(repoPath + "SimulationPrograms/datafiles/sunData");
         File[] files = directory.listFiles();
 
         for (int i = 0; i < files.length; i++) {
