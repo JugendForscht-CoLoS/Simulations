@@ -18,7 +18,7 @@ public class Main {
         for (int i = 0; i < data.length; i++) {
 
             data[i].read();
-            Writer w = new Writer("../datafiles/deviations/deviation" + i + ".deviationdata", data[i]);
+            Writer w = new Writer("../datafiles/deviations(0_46_0_11)/deviation" + i + ".deviationdata", data[i]);
           
             for (double holdingTime = 5 * 60; holdingTime < 3 * 3600; holdingTime += 5 * 60) {
 
