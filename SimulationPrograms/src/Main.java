@@ -8,9 +8,9 @@ public class Main {
 
     public static void main(String[] args) throws IOException, FileNotFoundException {
         
-        Reader[] data = new Reader[32];
+        Reader[] data = new Reader[12];
         
-        File directory = new File(repoPath + "SimulationPrograms/datafiles/sundata");
+        File directory = new File(repoPath + "SimulationPrograms/datafiles/sunData");
         File[] files = directory.listFiles();
 
         for (int i = 0; i < files.length; i++) {
@@ -23,7 +23,7 @@ public class Main {
             data[i].read();
             Writer w = new Writer(repoPath + "SimulationPrograms/datafiles/deviations/deviation" + i + ".deviationdata", data[i]);
           
-            for (double holdingTime = 5 * 60; holdingTime < 2 * 3600; holdingTime += 5 * 60) {
+            for (double holdingTime = 5 * 60; holdingTime < 3 * 3600; holdingTime += 5 * 60) {
 
                 Simulator s = new Simulator(5.7, 1.01, holdingTime);
                 w.write(holdingTime, s.getDeviationOfLocation(data[i]));
